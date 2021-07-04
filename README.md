@@ -1,5 +1,7 @@
 # Word Guess Game
 
+A word guessing game I made to work with the JavaScript DOM. Sorry, the website is not responsive.
+
 Rules & Information:
 1. The word to be guessed is chosen randomly from the word pool.
 2. Ten guesses.
