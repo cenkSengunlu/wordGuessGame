@@ -1,4 +1,4 @@
-#Word Guess Game
+# Word Guess Game
 
 Rules & Information:
 1. The word to be guessed is chosen randomly from the word pool.
