@@ -38,7 +38,7 @@ function gameStart(){
             if(key === 8 && i !== 0){
                 setTimeout(function(){
                     idArr[i - 1].focus();
-                  },1);
+                },1);
             }
         }
     }
@@ -95,7 +95,10 @@ function clickmyBtn() {
         if(falseCounter === 10){
             document.querySelector("#guessButton").style.display = "none";
             document.querySelector("#playAgainButton").style.display = "block";
-            alert(`You failed!\nYou didn't guess the word correctly.\nCorrect word: ${harfArr.join('')}`);
+            setTimeout(function(){
+                alert(`You failed!\nYou didn't guess the word correctly.\nCorrect word: ${harfArr.join('')}`);;
+            },1);
+            
         }
     }
 }
