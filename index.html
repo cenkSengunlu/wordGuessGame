@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Guess Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel='icon' href='favicon.png' type='image/x-icon' sizes="16x16" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wallpaper"></div>
+    <header>
+        <div>
+            <p style="font-size: 10rem; text-align:center; color:white; text-shadow: 5px 10px black;">Word Guess Game</p> 
+        </div>
+    </header>
+
+    <hr class="style-two">
+
+    <section>
+        <div class="guessArea">
+            <div class="box">
+                <div class="guess">
+                    <div id="inputKonum"></div>
+                    <button id="guessButton" type="button">GUESS</button>
+                    <button id="playAgainButton" type="button">PLAY AGAIN</button>
+                </div>
+                <div class="guessLeft">
+                    <p style="font-size:2rem; color:white; text-shadow: 2px 3px black;">Guess left: </p>
+                    <div id="gCounterKonum"></div>
+                </div>
+            </div>
+            <div id="grid"></div>
+        </div>
+        
+    </section>
+    
+
+
+
+    <script src="game.js"></script>
+</body>
+</html>

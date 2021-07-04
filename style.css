@@ -1,0 +1,228 @@
+* {
+    margin:0;
+    padding:0;
+    font-family: 'Akaya Kanadaka', cursive;
+    box-sizing: border-box;
+}
+
+.wallpaper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  content: "";
+  background: url(background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; 
+}
+
+#inputKonum {
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    margin:2rem 0;
+    
+}
+.harfler {
+    text-align: center;
+    text-shadow: 3px 6px black;
+}
+#letters {
+    font-size: 3rem !important;
+}
+
+.giris{
+    width: 4rem;
+    height: 4rem;
+    margin: 2rem 2px 0 2px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 0;
+    font-size:3.5rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.giris:focus {
+    outline: 0;
+}
+
+.guess, .guessLeft{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    margin-bottom:1rem;
+}
+
+#guessButton{
+    margin-left: 3rem;
+    text-align:center;
+    height: 4rem;
+    width: 9rem;
+    font-size: 2.5rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+#playAgainButton{
+    margin-left: 3rem;
+    text-align:center;
+    height: 4rem;
+    width: 16rem;
+    font-size: 2.5rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    
+}
+
+#guessButton:before, #playAgainButton:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+#guessButton:active, #playAgainButton:active {
+    color: #000
+}
+
+#guessButton:active:after, #playAgainButton:active:after {
+    background: transparent;
+}
+
+#guessButton:hover:before, #playAgainButton:hover:before {
+    opacity: 1;
+}
+
+#guessButton:after, #playAgainButton:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
+.guessCounter{
+    width: 2rem;
+    height: 2rem;
+    background-color:rgba(255, 255, 255, 0.7);
+    border:4px solid rgba(0, 0, 0, 0.9);
+    border-radius: 50%;
+    margin-left:8px;
+}
+
+.box{
+    display:flex;
+    align-items :flex-start;
+    flex-direction:column;
+    margin:auto;
+}
+
+.guessArea{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+#gCounterKonum{
+    display:flex;
+}
+
+#grid { 
+    display: grid; 
+    grid-template-columns: auto auto auto;
+    width: 600px;
+    height:3rem;
+    text-align: center;
+    margin:auto;
+}
+
+.guessListBox{
+    color: white;
+    background: #1D1F20;
+    font-size: 2.5rem;
+    margin:0.5rem;
+    display: flex;
+    justify-content:center;
+}
+
+.guessListBox {
+    --borderWidth: 3px;
+    background: #1D1F20;
+    position: relative;
+    border-radius: var(--borderWidth);
+}
+
+.guessListBox:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+}
+  
+@keyframes animatedgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
