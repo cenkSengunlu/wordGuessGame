@@ -80,7 +80,6 @@ function clickmyBtn() {
     
     let controlharfArr = harfArr.slice();
     let controlplayerGuess = playerGuess.slice();
-    console.log(...controlharfArr);
 
     for(let m = 0; m < controlharfArr.length; m++){
         for(let n = 0; n < playerGuess.length; n++){
