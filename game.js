@@ -11,37 +11,48 @@ let kelimeHavuzu = ["engine", "phone", "computer", "glass", "carpet", "camera", 
 function gameStart(){
     document.querySelector("#playAgainButton").style.display = "none";
     let randomNumber = Math.floor(Math.random() * kelimeHavuzu.length);
-
     harfArr = kelimeHavuzu[randomNumber].split('');
 
-    for(let i = 0; i < harfArr.length; i++){
-        let input = document.createElement("input");
-        input.setAttribute('type', 'text');
-        input.setAttribute('maxlength', 1);
-        input.classList.add('giris');
-        input.setAttribute('id', `input${i + 1}`);
-        idArr.push(input);
-        idArr[i].onkeypress = function(event){
-            return ((event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90));
-        }
-        idArr[i].onkeyup = function(){
-            if (this.value.length === parseInt(this.attributes["maxlength"].value) && i !== harfArr.length - 1) {
-                idArr[i + 1].focus();
-                idArr[i + 1].select();
-            }
-        }
-        let parent = document.querySelector('#inputKonum');
-        parent.appendChild(input);
+    document.querySelector("#letterCounter").innerHTML = `${harfArr.length} Letters`
+    document.querySelector("#guessInput").style.width = (harfArr.length + 1) + 'ch';
 
-        input.onkeydown = function(back) {
-        let key = back.keyCode || back.charCode;
-            if(key === 8 && i !== 0){
-                setTimeout(function(){
-                    idArr[i - 1].focus();
-                },1);
-            }
-        }
+    // for(let i = 0; i < harfArr.length; i++){
+    //     let input = document.createElement("input");
+    //     input.setAttribute('type', 'text');
+    //     input.setAttribute('maxlength', 1);
+    //     input.classList.add('giris');
+    //     input.setAttribute('id', `input${i + 1}`);
+    //     idArr.push(input);
+    //     idArr[i].onkeypress = function(event){
+    //         return ((event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90));
+    //     }
+    //     idArr[i].onkeyup = function(){
+    //         if (this.value.length === parseInt(this.attributes["maxlength"].value) && i !== harfArr.length - 1) {
+    //             idArr[i + 1].focus();
+    //             idArr[i + 1].select();
+    //         }
+    //     }
+    //     let parent = document.querySelector('#inputKonum');
+    //     parent.appendChild(input);
+
+    //     input.onkeydown = function(back) {
+    //     let key = back.keyCode || back.charCode;
+    //         if(key === 8 && i !== 0){
+    //             setTimeout(function(){
+    //                 idArr[i - 1].focus();
+    //             },1);
+    //         }
+    //     }
+    // }
+    
+
+    let input = document.querySelector("#guessInput");
+    input.setAttribute("maxlength",harfArr.length);
+
+    input.onkeypress = function(event){
+        return ((event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90));
     }
+
     for(let j = 0; j < 10; j++){
         let gCounter = document.createElement("div");
         gCounter.classList.add('guessCounter');
@@ -54,18 +65,35 @@ function gameStart(){
 document.querySelector("#guessButton").addEventListener("click", clickmyBtn);
 function clickmyBtn() {
     counter ++;
-    if(falseCounter === 10){
+    playerGuess.push(...document.querySelector(`#guessInput`).value.toLowerCase().split(''));
+    if(falseCounter === 10 || playerGuess.length !== harfArr.length){
+        playerGuess = [];
         return;
     }
-    let control = [];
+
+    
     for(let k = 0; k < harfArr.length; k++){
-        playerGuess.push(document.querySelector(`#input${k+1}`).value.toLowerCase());
         if(playerGuess[k] === harfArr[k]){
             trueDirection++;
         }
     }
-    control = [...control, ...harfArr.filter(x => playerGuess.includes(x))];
-    trueValue = control.length;
+    
+    let controlharfArr = harfArr.slice();
+    let controlplayerGuess = playerGuess.slice();
+    console.log(...controlharfArr);
+
+    for(let m = 0; m < controlharfArr.length; m++){
+        for(let n = 0; n < playerGuess.length; n++){
+            if(controlplayerGuess[n] === controlharfArr[m]){
+                controlplayerGuess.splice(n,1);
+                n--;
+                trueValue++;
+                break;
+            }
+        }
+    }
+    // control = [...control, ...harfArr.filter(x => playerGuess.includes(x))];
+    // trueValue = control.length;
 
     // Grid Oluşturma
     guessTable = [...guessTable, ...[counter, playerGuess.join('').toUpperCase(),`${trueValue}/${trueDirection}`]];
@@ -89,6 +117,7 @@ function clickmyBtn() {
     else{
         falseCounter++;
         document.querySelector(`#guessCounter${falseCounter}`).style.backgroundColor = "crimson";
+        document.querySelector("#guessInput").value = "";
         trueValue = 0;
         trueDirection = 0;
         playerGuess = [];

@@ -35,14 +35,14 @@ hr.style-two {
 }
 
 .giris{
-    width: 4rem;
+    
     height: 4rem;
     margin: 2rem 2px 0 2px;
-    text-align: center;
     background-color: rgba(255, 255, 255, 0.4);
     border: 0;
     font-size:3.5rem;
     border-radius: 10px;
+    text-align: center;
     text-transform: uppercase;
 }
 
