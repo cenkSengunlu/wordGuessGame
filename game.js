@@ -8,6 +8,19 @@ let trueDirection = 0;
 let falseCounter = 0;
 let kelimeHavuzu = ["engine", "phone", "computer", "glass", "carpet", "camera", "mirror", "table", "sponge", "game", "card", "share", "monkey", "dice"];
 
+const imageUrl = 'background.jpg';
+const bgElement = document.querySelector("html");
+let preloaderImg = document.createElement("img");
+preloaderImg.src = imageUrl;
+
+preloaderImg.addEventListener('load', (event) => {
+    bgElement.style.backgroundImage = `url(${imageUrl})`;
+    preloaderImg = null;
+    document.querySelector(".loaderSection").style.display = "none";
+    document.querySelector(".loadControl").style.display = "block";
+    
+});
+
 function gameStart(){
     document.querySelector("#playAgainButton").style.display = "none";
     let randomNumber = Math.floor(Math.random() * kelimeHavuzu.length);
@@ -16,34 +29,6 @@ function gameStart(){
     document.querySelector("#letterCounter").innerHTML = `${harfArr.length} Letters`
     document.querySelector("#guessInput").style.width = (harfArr.length + 1) + 'ch';
 
-    // for(let i = 0; i < harfArr.length; i++){
-    //     let input = document.createElement("input");
-    //     input.setAttribute('type', 'text');
-    //     input.setAttribute('maxlength', 1);
-    //     input.classList.add('giris');
-    //     input.setAttribute('id', `input${i + 1}`);
-    //     idArr.push(input);
-    //     idArr[i].onkeypress = function(event){
-    //         return ((event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90));
-    //     }
-    //     idArr[i].onkeyup = function(){
-    //         if (this.value.length === parseInt(this.attributes["maxlength"].value) && i !== harfArr.length - 1) {
-    //             idArr[i + 1].focus();
-    //             idArr[i + 1].select();
-    //         }
-    //     }
-    //     let parent = document.querySelector('#inputKonum');
-    //     parent.appendChild(input);
-
-    //     input.onkeydown = function(back) {
-    //     let key = back.keyCode || back.charCode;
-    //         if(key === 8 && i !== 0){
-    //             setTimeout(function(){
-    //                 idArr[i - 1].focus();
-    //             },1);
-    //         }
-    //     }
-    // }
     
 
     let input = document.querySelector("#guessInput");
@@ -64,13 +49,13 @@ function gameStart(){
 
 document.querySelector("#guessButton").addEventListener("click", clickmyBtn);
 function clickmyBtn() {
-    counter ++;
+    
     playerGuess.push(...document.querySelector(`#guessInput`).value.toLowerCase().split(''));
     if(falseCounter === 10 || playerGuess.length !== harfArr.length){
         playerGuess = [];
         return;
     }
-
+    counter ++;
     
     for(let k = 0; k < harfArr.length; k++){
         if(playerGuess[k] === harfArr[k]){
